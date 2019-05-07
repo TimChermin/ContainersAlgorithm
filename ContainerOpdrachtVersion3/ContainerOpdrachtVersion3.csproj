@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Container.cs" />
+    <Compile Include="NonLogic\Container.cs" />
     <Compile Include="Logic\ContainerLocationAvailability.cs" />
     <Compile Include="Logic\ContainerColumn.cs" />
     <Compile Include="Logic\ContainerListSorter.cs" />
@@ -62,8 +62,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Ship.cs" />
+    <Compile Include="NonLogic\Ship.cs" />
     <Compile Include="Logic\ShipBalanceLogic.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

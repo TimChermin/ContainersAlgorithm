@@ -8,5 +8,7 @@ namespace ContainerOpdrachtVersion3
 {
     class ContainerRow
     {
+        public ContainerColumn[] containerColumns;
+
     }
 }
