@@ -105,6 +105,10 @@ namespace ContainerOpdrachtVersion3
         {
             treeViewShip.Nodes.Clear();
             int nodeCount = CreateNodes();
+            int rowNr = 0;
+            int columnNr = 0;
+            int hightNr = 0;
+
             foreach (Container container in ship.GetContainersOnShip())
             {
                 bool containerAddedToArray = false;
@@ -114,13 +118,25 @@ namespace ContainerOpdrachtVersion3
                     {
                         for (int z = 0; z < ship.MaxHeight && containerAddedToArray == false; z++)
                         {
-                            foreach (Container containers in ship.GetShipArray())
+                            rowNr = 0;
+                            foreach (var row in ship.ContainerRows)
                             {
-                                if (/*shipArray[i, j, z] == container && container == containers && container != null && containers != null*/true)
+                                columnNr = 0;
+                                foreach (var column in row.ContainerColumns)
                                 {
-                                    treeViewShip.Nodes[i].Nodes[j].Nodes[z].Nodes.Add(container.ToString());
-                                    nodeCount++;
+                                    hightNr = 0;
+                                    foreach (var containers in column.containerStack)
+                                    {
+                                        if (rowNr == i && columnNr == j && hightNr == z && container == containers && container != null && containers != null)
+                                        {
+                                            treeViewShip.Nodes[i].Nodes[j].Nodes[z].Nodes.Add(container.ToString());
+                                            nodeCount++;
+                                        }
+                                        hightNr++;
+                                    }
+                                    columnNr++;
                                 }
+                                rowNr++;
                             }
                         }
                     }

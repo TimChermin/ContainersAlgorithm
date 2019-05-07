@@ -6,29 +6,42 @@ using System.Threading.Tasks;
 
 namespace ContainerOpdrachtVersion3
 {
-    class ContainerColumn
+    public class ContainerColumn
     {
         public List<Container> containerStack;
+        private ContainerValuableLogic containerValuableLogic;
         private int maxHeight;
 
-        public ContainerColumn(int maxHeight)
+        public ContainerColumn(int lenght, int width, int maxHeight)
         {
+            containerValuableLogic = new ContainerValuableLogic(lenght, width, maxHeight);
             this.maxHeight = maxHeight;
+        }
+
+        public bool CanPlaceContainer()
+        {
+
+            return true;
+        }
+
+        public void PlaceContainer()
+        {
+
         }
 
         public bool IsThisAViableLocation(int i, int y, int z, Container container)
         {
-            if (DoesThisLocationContainAContainer(z) == true || container.DoesTheContainerHaveCoolingAndIsItInFront(j) == false || WillThisNotGoOverTheMaxWeightOnTopOfAContainer(y, z, container) == false)
+            if (DoesThisLocationContainAContainer(z) == true || container.DoesTheContainerHaveCoolingAndIsItInFront(y) == false || WillThisNotGoOverTheMaxWeightOnTopOfAContainer(y, z, container) == false)
             {
                 return false;
             }
 
-            if (containerValuableLogic.DoesTheLocationHaveAnValuable(i, j, z, container, shipArray) == true && container.Valuable == true)
+            if (containerValuableLogic.DoesTheLocationHaveAnValuable(i, y, z, container) == true && container.Valuable == true)
             {
                 return false;
                 //location has a valuable so do something else
             }
-            if (containerValuableLogic.CanThisContainerBeAddedWithTheValuable(i, j, z, container, shipArray) == false)
+            if (containerValuableLogic.CanThisContainerBeAddedWithTheValuable(i, y, z, container) == false)
             {
                 return false;
             }

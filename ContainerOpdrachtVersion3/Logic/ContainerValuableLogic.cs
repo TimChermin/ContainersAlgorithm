@@ -30,28 +30,23 @@ namespace ContainerOpdrachtVersion3
 
         public bool ReOrdered { get; set; }
 
-        public bool DoesTheLocationHaveAnValuable(int i, int y, int z, Container container)
+        public bool DoesTheLocationHaveAnValuable(int i, int y, int z, List<Container> containerStack)
         {
             int valuableCount = 0;
-            int containerCount = 0;
             int highestValuable = 0;
 
             containersValuableOnLocation.Clear();
-            for (int z_CheckVal = 0; z_CheckVal < shipArray.GetLength(2); z_CheckVal++)
+            for (int z_CheckVal = 0; z_CheckVal < z; z_CheckVal++)
             {
-                foreach (Container containerInArray in shipArray)
+                foreach (Container containerInStack in containerStack)
                 {
-                    if (containerInArray != null)
+                    if (containerInStack != null)
                     {
-                        if (shipArray[i, y, z_CheckVal] == containerInArray && containerInArray.Valuable == true)
+                        if (containerInStack.Valuable == true)
                         {
                             valuableCount++;
-                            containersValuableOnLocation.Add(containerInArray);
+                            containersValuableOnLocation.Add(containerInStack);
                             highestValuable = z_CheckVal;
-                        }
-                        if (shipArray[i, y, z_CheckVal] == containerInArray)
-                        {
-                            containerCount++;
                         }
                     }
                 }
@@ -64,7 +59,7 @@ namespace ContainerOpdrachtVersion3
         }
 
 
-        public bool CanThisContainerBeAddedWithTheValuable(int i, int y, int z, Container container)
+        public bool CanThisContainerBeAddedWithTheValuable(int i, int y, int z, Container container, List<Container> containerStack)
         {
             bool stillPossible = true;
             if (container.Valuable == true && valuableCount != 0)
@@ -73,7 +68,7 @@ namespace ContainerOpdrachtVersion3
             }
 
 
-            if (valuableCount != 0 && containerCount < shipArray.GetLength(2) && container.Valuable == false && (highestValuable + 1) < shipArray.GetLength(2))
+            if (valuableCount != 0 && containerCount < MaxHeight && container.Valuable == false && (highestValuable + 1) < MaxHeight)
             {
                 //should this method be here?
                 containerOrderChanger.HighestValuable = highestValuable;
@@ -83,7 +78,7 @@ namespace ContainerOpdrachtVersion3
 
             if (container.Cooling == false && container.Valuable == true)
             {
-                stillPossible = ContainerValuableCheckFrontAndBack(i, y, z, container, shipArray);
+                stillPossible = ContainerValuableCheckFrontAndBack(i, y, z, container, containerStack);
             }
 
             containersValuableOnLocation.Clear();
@@ -91,14 +86,14 @@ namespace ContainerOpdrachtVersion3
         }
 
 
-        public bool ContainerValuableCheckFrontAndBack(int i, int y, int z, Container container)
+        public bool ContainerValuableCheckFrontAndBack(int i, int y, int z, ContainerColumn column, List<Container> containerStack)
         {
             //front is free
-            if (j == 0)
+            if (y == 0)
             {
                 return true;
             }
-            else if (ContainerUnderThisLocation(i, j, z, true, shipArray) == false)
+            else if (ContainerUnderThisLocation(i, y, z, containerStack) == false)
             {
                 return false;
             }
@@ -141,7 +136,7 @@ namespace ContainerOpdrachtVersion3
             //j_ContainerNextToj is location container you are checking
             //j_behindTheContainer is location container behind the container
             int j_behindTheContainer = y_ContainerNextToy;
-            if ((j_behindTheContainer - 1) >= 0)
+            /*if ((j_behindTheContainer - 1) >= 0)
             {
                 foreach (Container containerInArray in shipArray)
                 {
@@ -151,6 +146,7 @@ namespace ContainerOpdrachtVersion3
                     }
                 }
             }
+            */
 
             if (containerBehindCount >= 1)
             {
@@ -160,14 +156,14 @@ namespace ContainerOpdrachtVersion3
             return true;
         }
 
-        public bool ContainerUnderThisLocation(int i, int j, int z, bool stillPossible, Container[,,] shipArray)
+        public bool ContainerUnderThisLocation(int i, int j, int z, List<Container> containerStack)
         {
             int containerUnderThis = 0;
             for (int z_as = 0; z_as < z; z_as++)
             {
-                foreach (Container containerInArray in shipArray)
+                foreach (Container containerInStack in containerStack)
                 {
-                    if (containerInArray != null && shipArray[i, j, z_as] == containerInArray)
+                    if (containerInStack != null)
                     {
                         containerUnderThis++;
                     }
@@ -177,7 +173,7 @@ namespace ContainerOpdrachtVersion3
             {
                 return false;
             }
-            return stillPossible;
+            return true;
         }
     }
 }

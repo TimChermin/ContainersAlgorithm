@@ -6,9 +6,47 @@ using System.Threading.Tasks;
 
 namespace ContainerOpdrachtVersion3
 {
-    class ContainerRow
+    public class ContainerRow
     {
-        public ContainerColumn[] containerColumns;
+        private int rowNr;
+        private int columnNr;
+
+        public ContainerColumn[] ContainerColumns { get; set; }
+
+        public ContainerRow(int lenght)
+        {
+            ContainerColumns = new ContainerColumn[lenght];
+        }
+
+        public bool CanPlaceContainer(Container container)
+        {
+            // checks?
+
+            if (CanPlaceContainerColumn(container) == true)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool CanPlaceContainerColumn(Container container)
+        {
+            columnNr = 0;
+            foreach (ContainerColumn column in ContainerColumns)
+            {
+                if (column.CanPlaceContainer() == true)
+                {
+                    return true;
+                }
+                columnNr++;
+            }
+            return false;
+        }
+
+        public void PlaceContainer()
+        {
+            ContainerColumns[columnNr].PlaceContainer();
+        }
 
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ContainerOpdrachtVersion3
 {
-    class ContainerLocationAvailability
+    public class ContainerLocationAvailability
     {
     }
 }

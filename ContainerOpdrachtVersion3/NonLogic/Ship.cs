@@ -17,8 +17,9 @@ namespace ContainerOpdrachtVersion3
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
+            ContainerRows = new ContainerRow[width]; //misschien lenght
 
-            containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight);
+            containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight, ContainerRows);
             containerListSorter = new ContainerListSorter();
 
             ContainersOnShip = new List<Container>();
@@ -42,6 +43,7 @@ namespace ContainerOpdrachtVersion3
         public int WeightMiddle { get; set; }
         public int Middle { get; set; }
         public int Lenght { get; set; }
+        public ContainerRow[] ContainerRows { get; set; }
 
 
         public void AddContainer(int weight, bool valuable, bool cooling)
@@ -58,13 +60,9 @@ namespace ContainerOpdrachtVersion3
 
         public void LookForLocationPerContainer()
         {
-            containerLocationFinder.LookForLocationPerContainer(shipArray, ContainersLookingForLocation, ContainersCouldntAddToShip);
+            ContainerRows = containerLocationFinder.LookForLocationPerContainer(ContainerRows, ContainersLookingForLocation, ContainersCouldntAddToShip);
         }
-
-        public Container[,,] GetShipArray()
-        {
-            return containerLocationFinder.ShipArray;
-        }
+        
         public void ClearContainersLists()
         {
             ContainersLookingForLocation.Clear();
