@@ -50,15 +50,15 @@ namespace ContainerOpdrachtVersion3
                 int rowNr = 0;
                 foreach (ContainerRow row in containerRows)
                 {
-                    if (shipBalanceLogic.WillThisLocationKeepTheBalanceOfTheShip(rowNr, container, ContainersOnShip))
-                    {
+                    //if (shipBalanceLogic.WillThisLocationKeepTheBalanceOfTheShip(rowNr, container, ContainersOnShip))
+                    //{
                         if (row.CanPlaceContainer(container) == true)
                         {
                             ContainersOnShip.Add(container);
                             row.PlaceContainer(container);
                             break;
                         }
-                    }
+                    //}
                     rowNr++;
                 }
             }

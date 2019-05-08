@@ -123,7 +123,7 @@ namespace ContainerOpdrachtVersion3
                         {
                             if (container == containers && container != null && containers != null)
                             {
-                                treeViewShip.Nodes[rowNr].Nodes[columnNr].Nodes[hightNr].Nodes.Add(container.ToString());
+                                treeViewShip.Nodes[columnNr].Nodes[rowNr].Nodes[hightNr].Nodes.Add(container.ToString());
                                 nodeCount++;
                             }
                             hightNr++;

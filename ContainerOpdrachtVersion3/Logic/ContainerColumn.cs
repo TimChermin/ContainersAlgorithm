@@ -21,6 +21,11 @@ namespace ContainerOpdrachtVersion3
 
         public bool CanPlaceContainer()
         {
+            if (containerStack.Count + 1 > maxHeight)
+            {
+                return false;
+            }
+
             return true;
         }
 
