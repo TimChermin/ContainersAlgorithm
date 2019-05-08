@@ -41,7 +41,6 @@ namespace ContainerOpdrachtVersion3
         public ContainerRow[] LookForLocationPerContainer(ContainerRow[] containerRows, List<Container> containersLookingForLocation, List<Container> containersCouldntAddToShip)
         {
             ContainerRows = containerRows;
-            Array.Clear(containerRows, 0, containerRows.Length);
             containersCouldntAddToShip.Clear();
             shipBalanceLogic.ResetWeight();
 
@@ -55,7 +54,9 @@ namespace ContainerOpdrachtVersion3
                     {
                         if (row.CanPlaceContainer(container) == true)
                         {
-                            row.PlaceContainer();
+                            ContainersOnShip.Add(container);
+                            row.PlaceContainer(container);
+                            break;
                         }
                     }
                     rowNr++;
@@ -86,78 +87,6 @@ namespace ContainerOpdrachtVersion3
             }
             containerRows = containerOrderChanger.HighestWeightContainerAtTheBottem(containerRows);
             */
-        }
-
-        public void CheckThisLocation(int i, int j, int z, Container container, List<Container> containersLookingForLocation)
-        {
-            /*
-            if (containerLocationAvailability.IsThisAViableLocation(i, j, z, ContainerRows, container) == true
-                && containerLocationAvailability.CheckShipWeightAndMaxWeightOnContainer(i, j, z, container, containersLookingForLocation, shipBalanceLogic) == true)
-            {
-                if (containerValuableLogic.ReOrdered == true)
-                {
-                    ContainerRows = containerOrderChanger.ReOrderLocationWhenAddingOnCoolingValuable(i, j, z, ContainerRows);
-                }
-                ContainerRows[i, j, z] = container;
-                containerCanBeAddedToArray = true;
-                AddWeightToShip(i, container);
-            }
-            */
-        }
-
-        public void IsTheContainerAddedToTheArray(bool containerCanBeAddedToArray, bool containerAddedToArray, Container container, List<Container> containersCouldntAddToShip)
-        {
-            if (containerCanBeAddedToArray == true)
-            {
-                ContainersOnShip.Add(container);
-                containerAddedToArray = true;
-            }
-            if (containerAddedToArray == false)
-            {
-                containersCouldntAddToShip.Add(container);
-            }
-        }
-
-
-        //not sure if this works
-        public void AddWeightToShip(int i, Container container)
-        {
-            if (shipBalanceLogic.HasEvenMiddle == true)
-            {
-                AddWeightToShipForEvenMiddle(i, container);
-            }
-            else
-            {
-                AddWeightToShipForUnEvenMiddle(i, container);
-            }
-        }
-
-        public void AddWeightToShipForEvenMiddle(int i, Container container)
-        {
-            if (i <= shipBalanceLogic.Middle)
-            {
-                shipBalanceLogic.WeightLeft += container.Weight;
-            }
-            else if (i > shipBalanceLogic.Middle)
-            {
-                shipBalanceLogic.WeightRight += container.Weight;
-            }
-        }
-
-        public void AddWeightToShipForUnEvenMiddle(int i, Container container)
-        {
-            if (i > shipBalanceLogic.Middle)
-            {
-                shipBalanceLogic.WeightRight += container.Weight;
-            }
-            else if (i < shipBalanceLogic.Middle)
-            {
-                shipBalanceLogic.WeightLeft += container.Weight;
-            }
-            else if (i == shipBalanceLogic.Middle)
-            {
-                shipBalanceLogic.WeightMiddle += container.Weight;
-            }
         }
     }
 }

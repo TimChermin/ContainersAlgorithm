@@ -112,34 +112,25 @@ namespace ContainerOpdrachtVersion3
             foreach (Container container in ship.GetContainersOnShip())
             {
                 bool containerAddedToArray = false;
-                for (int i = 0; i < ship.Lenght && containerAddedToArray == false; i++)
+                rowNr = 0;
+                foreach (var row in ship.ContainerRows)
                 {
-                    for (int j = 0; j < ship.Width && containerAddedToArray == false; j++)
+                    columnNr = 0;
+                    foreach (var column in row.ContainerColumns)
                     {
-                        for (int z = 0; z < ship.MaxHeight && containerAddedToArray == false; z++)
+                        hightNr = 0;
+                        foreach (var containers in column.containerStack)
                         {
-                            rowNr = 0;
-                            foreach (var row in ship.ContainerRows)
+                            if (container == containers && container != null && containers != null)
                             {
-                                columnNr = 0;
-                                foreach (var column in row.ContainerColumns)
-                                {
-                                    hightNr = 0;
-                                    foreach (var containers in column.containerStack)
-                                    {
-                                        if (rowNr == i && columnNr == j && hightNr == z && container == containers && container != null && containers != null)
-                                        {
-                                            treeViewShip.Nodes[i].Nodes[j].Nodes[z].Nodes.Add(container.ToString());
-                                            nodeCount++;
-                                        }
-                                        hightNr++;
-                                    }
-                                    columnNr++;
-                                }
-                                rowNr++;
+                                treeViewShip.Nodes[rowNr].Nodes[columnNr].Nodes[hightNr].Nodes.Add(container.ToString());
+                                nodeCount++;
                             }
+                            hightNr++;
                         }
+                        columnNr++;
                     }
+                    rowNr++;
                 }
             }
             return nodeCount;

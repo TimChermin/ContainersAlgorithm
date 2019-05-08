@@ -58,7 +58,7 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-
+        /*
         public bool CanThisContainerBeAddedWithTheValuable(int i, int y, int z, Container container, List<Container> containerStack)
         {
             bool stillPossible = true;
@@ -84,8 +84,9 @@ namespace ContainerOpdrachtVersion3
             containersValuableOnLocation.Clear();
             return stillPossible;
         }
+        */
 
-
+        /*
         public bool ContainerValuableCheckFrontAndBack(int i, int y, int z, ContainerColumn column, List<Container> containerStack)
         {
             //front is free
@@ -98,7 +99,7 @@ namespace ContainerOpdrachtVersion3
                 return false;
             }
 
-
+            
             int containerInfrontAndBehindCount = 0;
             for (int j_ContainerNextToj = (j - 1); j_ContainerNextToj <= (j + 1); j_ContainerNextToj++)
             {
@@ -123,15 +124,16 @@ namespace ContainerOpdrachtVersion3
             }
             return true;
         }
+        */
 
         public bool WillThisBlockTheOtherValuable(int i, int y, int z, int y_ContainerNextToy)
         {
             int containerBehindCount = 0;
 
-            if (ContainerUnderThisLocation(i, j, z) == false)
-            {
-                return false;
-            }
+            //if (ContainerUnderThisLocation(i, y, z) == false)
+            //{
+           //    return false;
+           // }
 
             //j_ContainerNextToj is location container you are checking
             //j_behindTheContainer is location container behind the container

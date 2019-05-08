@@ -10,12 +10,27 @@ namespace ContainerOpdrachtVersion3
     {
         private int rowNr;
         private int columnNr;
+        private int lenght;
+        private int width;
+        private int maxHeight;
 
         public ContainerColumn[] ContainerColumns { get; set; }
 
-        public ContainerRow(int lenght)
+        public ContainerRow(int lenght, int width, int maxHeight)
         {
+            this.lenght = lenght;
+            this.width = width;
+            this.maxHeight = maxHeight;
             ContainerColumns = new ContainerColumn[lenght];
+            CreateColumns();
+        }
+
+        private void CreateColumns()
+        {
+            for (int l = 0; l < lenght; l++)
+            {
+                ContainerColumns[l] = new ContainerColumn(lenght, width, maxHeight);
+            }
         }
 
         public bool CanPlaceContainer(Container container)
@@ -43,9 +58,9 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        public void PlaceContainer()
+        public void PlaceContainer(Container container)
         {
-            ContainerColumns[columnNr].PlaceContainer();
+            ContainerColumns[columnNr].PlaceContainer(container);
         }
 
     }

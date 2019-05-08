@@ -17,7 +17,8 @@ namespace ContainerOpdrachtVersion3
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
-            ContainerRows = new ContainerRow[width]; //misschien lenght
+            ContainerRows = new ContainerRow[Width]; //misschien lenght
+            CreateRows();
 
             containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight, ContainerRows);
             containerListSorter = new ContainerListSorter();
@@ -45,6 +46,13 @@ namespace ContainerOpdrachtVersion3
         public int Lenght { get; set; }
         public ContainerRow[] ContainerRows { get; set; }
 
+        public void CreateRows() // de garbage methode van wessel
+        {
+            for (int w = 0; w < Width; w++)
+            {
+                ContainerRows[w] = new ContainerRow(Lenght, Width, MaxHeight);
+            }
+        }
 
         public void AddContainer(int weight, bool valuable, bool cooling)
         {

@@ -190,6 +190,7 @@
             this.buttonAddContainerToShip.TabIndex = 41;
             this.buttonAddContainerToShip.Text = "Add Containers to Ship";
             this.buttonAddContainerToShip.UseVisualStyleBackColor = true;
+            this.buttonAddContainerToShip.Click += new System.EventHandler(this.buttonAddContainerToShip_Click);
             // 
             // listBoxContainersNotOnShip
             // 
@@ -305,6 +306,7 @@
             this.buttonAddShip.TabIndex = 13;
             this.buttonAddShip.Text = "Add Ship";
             this.buttonAddShip.UseVisualStyleBackColor = true;
+            this.buttonAddShip.Click += new System.EventHandler(this.buttonAddShip_Click);
             // 
             // label2
             // 
@@ -407,6 +409,7 @@
             this.buttonAddContainer.TabIndex = 0;
             this.buttonAddContainer.Text = "Add Container";
             this.buttonAddContainer.UseVisualStyleBackColor = true;
+            this.buttonAddContainer.Click += new System.EventHandler(this.buttonAddContainer_Click);
             // 
             // checkBoxCooling
             // 
