@@ -47,7 +47,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NonLogic\Container.cs" />
-    <Compile Include="Logic\ContainerLocationAvailability.cs" />
     <Compile Include="Logic\ContainerColumn.cs" />
     <Compile Include="Logic\ContainerListSorter.cs" />
     <Compile Include="Logic\ContainerLocationFinder.cs" />

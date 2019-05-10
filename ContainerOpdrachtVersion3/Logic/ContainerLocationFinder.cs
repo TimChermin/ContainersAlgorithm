@@ -11,11 +11,7 @@ namespace ContainerOpdrachtVersion3
         private bool containerCanBeAddedToArray = false;
         private bool containerAddedToArray = false;
         private ContainerRow[] containerRows;
-        private ContainerListSorter containerListSorter;
-        private ContainerLocationAvailability containerLocationAvailability;
         private ShipBalanceLogic shipBalanceLogic;
-        private ContainerValuableLogic containerValuableLogic;
-        private ContainerOrderChanger containerOrderChanger;
 
         public ContainerLocationFinder(int lenght, int width, int maxHeight, int maxWeight, ContainerRow[] containerRows)
         {
@@ -25,9 +21,6 @@ namespace ContainerOpdrachtVersion3
             this.MaxWeight = maxWeight;
             this.ContainerRows = containerRows;
             shipBalanceLogic = new ShipBalanceLogic(lenght, width, maxHeight, maxWeight, containerRows);
-            containerListSorter = new ContainerListSorter();
-            containerValuableLogic = new ContainerValuableLogic(lenght, width, maxHeight);
-            containerOrderChanger = new ContainerOrderChanger(lenght, width, maxHeight);
             ContainersOnShip = new List<Container>();
         }
         
