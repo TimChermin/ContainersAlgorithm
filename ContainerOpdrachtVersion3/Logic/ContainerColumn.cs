@@ -19,17 +19,17 @@ namespace ContainerOpdrachtVersion3
             this.maxHeight = maxHeight;
         }
 
-        public bool CanPlaceContainer()
+        public bool TryToPlaceContainer(Container container)
         {
             if (containerStack.Count + 1 > maxHeight)
             {
                 return false;
             }
-
+            PlaceContainer(container);
             return true;
         }
 
-        public void PlaceContainer(Container container)
+        private void PlaceContainer(Container container)
         {
             containerStack.Add(container);
         }

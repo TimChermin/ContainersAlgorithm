@@ -11,16 +11,17 @@ namespace ContainerOpdrachtVersion3
         private bool containerCanBeAddedToArray = false;
         private bool containerAddedToArray = false;
         private ContainerRow[] containerRows;
-        private ShipBalanceLogic shipBalanceLogic;
+        private ContainerListSorter containerListSorter;
 
-        public ContainerLocationFinder(int lenght, int width, int maxHeight, int maxWeight, ContainerRow[] containerRows)
+        public ContainerLocationFinder(int lenght, int width, int maxHeight, int maxWeight, ContainerRow[] containerRows, ShipBalanceLogic shipBalanceLogic)
         {
             this.Lenght = lenght;
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
             this.ContainerRows = containerRows;
-            shipBalanceLogic = new ShipBalanceLogic(lenght, width, maxHeight, maxWeight, containerRows);
+            ShipBalanceLogic = shipBalanceLogic;
+            containerListSorter = new ContainerListSorter();
             ContainersOnShip = new List<Container>();
         }
         
@@ -30,29 +31,36 @@ namespace ContainerOpdrachtVersion3
         public int MaxWeight { get; set; }
         public int Lenght { get; set; }
         internal ContainerRow[] ContainerRows { get => containerRows; set => containerRows = value; }
+        public ShipBalanceLogic ShipBalanceLogic { get; set; }
 
         public ContainerRow[] LookForLocationPerContainer(ContainerRow[] containerRows, List<Container> containersLookingForLocation, List<Container> containersCouldntAddToShip)
         {
             ContainerRows = containerRows;
             containersCouldntAddToShip.Clear();
-            shipBalanceLogic.ResetWeight();
+            ShipBalanceLogic.ResetWeight();
 
 
             foreach (Container container in containersLookingForLocation)
             {
                 int rowNr = 0;
+                bool containerLocationFound = false;
                 foreach (ContainerRow row in containerRows)
                 {
-                    //if (shipBalanceLogic.WillThisLocationKeepTheBalanceOfTheShip(rowNr, container, ContainersOnShip))
-                    //{
-                        if (row.CanPlaceContainer(container) == true)
+                    if (ShipBalanceLogic.WillThisLocationKeepTheBalanceOfTheShip(rowNr, container, ContainersOnShip))
+                    {
+                        if (row.TryToPlaceContainer(container) == true)
                         {
                             ContainersOnShip.Add(container);
-                            row.PlaceContainer(container);
+                            ShipBalanceLogic.AddContainerWeight(container, rowNr);
+                            containerLocationFound = true;
                             break;
                         }
-                    //}
+                    }
                     rowNr++;
+                }
+                if (containerLocationFound == false)
+                {
+                    containersCouldntAddToShip.Add(container);
                 }
             }
             return ContainerRows;

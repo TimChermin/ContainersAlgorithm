@@ -6,15 +6,14 @@ using System.Threading.Tasks;
 
 namespace ContainerOpdrachtVersion3
 {
-    class ShipBalanceLogic
+    public class ShipBalanceLogic
     {
-        public ShipBalanceLogic(int lenght, int width, int maxHeight, int maxWeight, ContainerRow[] containerRows)
+        public ShipBalanceLogic(int lenght, int width, int maxHeight, int maxWeight)
         {
             this.Lenght = lenght;
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
-            this.ContainerRows = containerRows;
         }
 
         public int MaxHeight { get; set; }
@@ -44,7 +43,7 @@ namespace ContainerOpdrachtVersion3
                 return false;
             }
 
-            if (EvenMiddle(Width) == true /*&& IsTheShipEmpty(containersOnShip) >= 1*/)
+            if (EvenMiddle(Lenght) == true /*&& IsTheShipEmpty(containersOnShip) >= 1*/)
             {
                 return WillThisLocationKeepTheBalanceOfTheShipWithEvenMiddle(i, container);
             }
@@ -142,6 +141,22 @@ namespace ContainerOpdrachtVersion3
             WeightLeft = 0;
             WeightRight = 0;
             WeightMiddle = 0;
+        }
+
+        public void AddContainerWeight(Container container, int row)
+        {
+            if (row == Middle)
+            {
+                WeightMiddle += container.Weight;
+            }
+            else if (row < Middle)
+            {
+                WeightLeft += container.Weight;
+            }
+            else if (row > Middle)
+            {
+                WeightRight += container.Weight;
+            }
         }
     }
 }

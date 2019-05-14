@@ -21,35 +21,35 @@ namespace ContainerOpdrachtVersion3
             this.lenght = lenght;
             this.width = width;
             this.maxHeight = maxHeight;
-            ContainerColumns = new ContainerColumn[lenght];
+            ContainerColumns = new ContainerColumn[width];
             CreateColumns();
         }
 
         private void CreateColumns()
         {
-            for (int l = 0; l < lenght; l++)
+            for (int w = 0; w < width; w++)
             {
-                ContainerColumns[l] = new ContainerColumn(lenght, width, maxHeight);
+                ContainerColumns[w] = new ContainerColumn(lenght, width, maxHeight);
             }
         }
 
-        public bool CanPlaceContainer(Container container)
+        public bool TryToPlaceContainer(Container container)
         {
             // checks?
 
-            if (CanPlaceContainerColumn(container) == true)
+            if (TryToPlaceContainerColumn(container) == true)
             {
                 return true;
             }
             return false;
         }
 
-        public bool CanPlaceContainerColumn(Container container)
+        private bool TryToPlaceContainerColumn(Container container)
         {
             columnNr = 0;
             foreach (ContainerColumn column in ContainerColumns)
             {
-                if (column.CanPlaceContainer() == true)
+                if (column.TryToPlaceContainer(container) == true)
                 {
                     return true;
                 }
@@ -58,10 +58,11 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        public void PlaceContainer(Container container)
+        /*public void PlaceContainer(Container container)
         {
             ContainerColumns[columnNr].PlaceContainer(container);
         }
+        */
 
     }
 }

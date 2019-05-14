@@ -96,7 +96,7 @@ namespace ContainerOpdrachtVersion3
             GetContainersNotOnShip();
             GetContainersOnShip();
             GetContainersCouldntAdd();
-            //GetShipWeight();
+            GetShipWeight();
         }
 
 
@@ -123,7 +123,7 @@ namespace ContainerOpdrachtVersion3
                         {
                             if (container == containers && container != null && containers != null)
                             {
-                                treeViewShip.Nodes[columnNr].Nodes[rowNr].Nodes[hightNr].Nodes.Add(container.ToString());
+                                treeViewShip.Nodes[rowNr].Nodes[columnNr].Nodes[hightNr].Nodes.Add(container.ToString());
                                 nodeCount++;
                             }
                             hightNr++;
@@ -154,29 +154,29 @@ namespace ContainerOpdrachtVersion3
             }
         }
 
-        /*private void GetShipWeight()
+         private void GetShipWeight()
          {
-             labelWeightLeftSide.Text = "Weight Left side: " + ship.GetWeightLeft().ToString();
-             labelWeightRightSide.Text = "Weight Right side: " + ship.GetWeightRight().ToString();
-             labelWeightTotal.Text = "Weight total: " + ship.GetWeight().ToString();
-             labelWeightMiddle.Text = "Weight Middle: " + ship.GetWeightMiddle().ToString();
+             labelWeightLeftSide.Text = "Weight Left side: " + ship.WeightLeft.ToString();
+             labelWeightRightSide.Text = "Weight Right side: " + ship.WeightRight.ToString();
+             labelWeightTotal.Text = "Weight total: " + ship.Weight.ToString();
+             labelWeightMiddle.Text = "Weight Middle: " + ship.WeightMiddle.ToString();
              labelMaxWeight.Text = "Max Weight: " + ship.MaxWeight;
-             double MaxDiff = (ship.GetWeight()) * 0.20;
+             double MaxDiff = (ship.Weight) * 0.20;
              labelMaxWeightDifference.Text = "Max Weight Diff: " + MaxDiff.ToString();
 
-             GetShipStatsWithDifferences(MaxDiff);
+             GetShipWeightWithDifferences(MaxDiff);
          }
 
          public void GetShipWeightWithDifferences(double MaxDiff)
          {
              int shipWeightDiff;
-             if (ship.GetWeightRight() > ship.GetWeightLeft())
+             if (ship.WeightRight > ship.WeightLeft)
              {
-                 shipWeightDiff = ship.GetWeightRight() - ship.GetWeightLeft();
+                 shipWeightDiff = ship.WeightRight - ship.WeightLeft;
              }
              else
              {
-                 shipWeightDiff = ship.GetWeightLeft() - ship.GetWeightRight();
+                 shipWeightDiff = ship.WeightLeft - ship.WeightRight;
              }
              labelWeightDiff.Text = "Weight Difference: " + shipWeightDiff;
              GetMaxShipWeight(shipWeightDiff, MaxDiff);
@@ -185,13 +185,13 @@ namespace ContainerOpdrachtVersion3
          public void GetMaxShipWeight(int shipWeightDiff, double MaxDiff)
          {
              int result = 0;
-             if (ship.GetWeight() == 0)
+             if (ship.Weight == 0)
              {
                  labelMaxWeightUsage.Text = "Max Weight Usage: " + 0 + " Used";
              }
              else
              {
-                 result = ((ship.MaxWeight - (ship.MaxWeight - ship.GetWeight())) * 100 / ship.MaxWeight);
+                 result = ((ship.MaxWeight - (ship.MaxWeight - ship.Weight)) * 100 / ship.MaxWeight);
                  labelMaxWeightUsage.Text = "Max Weight Usage: " + result + "% Used";
              }
              GetPossibleShipText(result, shipWeightDiff, MaxDiff);
@@ -200,7 +200,7 @@ namespace ContainerOpdrachtVersion3
 
          public void GetPossibleShipText(int result, int shipWeightDiff, double MaxDiff)
          {
-             if (ship.MaxWeight < ship.GetWeight() || result < 50 || shipWeightDiff > MaxDiff)
+             if (ship.MaxWeight < ship.Weight || result < 50 || shipWeightDiff > MaxDiff)
              {
                  labelShipPossible.Text = "Is The Ship Possible: No";
              }
@@ -209,6 +209,6 @@ namespace ContainerOpdrachtVersion3
                  labelShipPossible.Text = "Is The Ship Possible: Yes";
              }
          }
-         */
+         
     }
 }

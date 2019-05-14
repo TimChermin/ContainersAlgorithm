@@ -1,0 +1,3 @@
+in the ContainerRow you check logic for infront and behind you and sht
+
+in the containerColumn you check logic for stacks
