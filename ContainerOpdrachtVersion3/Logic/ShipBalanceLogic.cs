@@ -36,7 +36,7 @@ namespace ContainerOpdrachtVersion3
         public bool WillThisLocationKeepTheBalanceOfTheShip(int i, Container container, List<Container> containersOnShip)
         {
             //this could contain buggs
-            bool MiddleIsEven = EvenMiddle(Width);
+            bool MiddleIsEven = EvenMiddle(Lenght);
 
             if (WeightLeft + WeightMiddle + WeightRight + container.Weight > MaxWeight)
             {
@@ -47,7 +47,7 @@ namespace ContainerOpdrachtVersion3
             {
                 return WillThisLocationKeepTheBalanceOfTheShipWithEvenMiddle(i, container);
             }
-            else if (/*IsTheShipEmpty(containersOnShip) >= 1 &&*/ Middle != 0 && EvenMiddle(Width) == false)
+            else if (/*IsTheShipEmpty(containersOnShip) >= 1 &&*/ Middle != 0 && EvenMiddle(Lenght) == false)
             {
                 return WillThisLocationKeepTheBalanceOfTheShipWithUnEvenMiddle(i, container);
             }
@@ -145,7 +145,7 @@ namespace ContainerOpdrachtVersion3
 
         public void AddContainerWeight(Container container, int row)
         {
-            if (row == Middle)
+            if (row == Middle && HasEvenMiddle == false)
             {
                 WeightMiddle += container.Weight;
             }
@@ -153,7 +153,7 @@ namespace ContainerOpdrachtVersion3
             {
                 WeightLeft += container.Weight;
             }
-            else if (row > Middle)
+            else if (row >= Middle)
             {
                 WeightRight += container.Weight;
             }
