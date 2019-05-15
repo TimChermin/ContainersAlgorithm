@@ -35,8 +35,6 @@ namespace ContainerOpdrachtVersion3
 
         public bool TryToPlaceContainer(Container container)
         {
-            // checks?
-
             if (TryToPlaceContainerColumn(container) == true)
             {
                 return true;

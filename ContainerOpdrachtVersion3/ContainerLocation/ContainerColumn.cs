@@ -9,7 +9,6 @@ namespace ContainerOpdrachtVersion3
     public class ContainerColumn
     {
         public List<Container> containerStack;
-        private ContainerValuableLogic containerValuableLogic;
         private int maxHeight;
         private int weight;
         private int valuableCount;
@@ -17,7 +16,6 @@ namespace ContainerOpdrachtVersion3
         public ContainerColumn(int lenght, int width, int maxHeight)
         {
             containerStack = new List<Container>();
-            containerValuableLogic = new ContainerValuableLogic(lenght, width, maxHeight);
             this.maxHeight = maxHeight;
         }
 
@@ -90,28 +88,6 @@ namespace ContainerOpdrachtVersion3
         {
             containerStack = containerStack.OrderByDescending(container => container.Weight).ToList();
             containerStack = containerStack.OrderBy(container => container.Valuable).ToList();
-            containerStack = containerStack;
-            /*List<Container> valuables = new List<Container>();
-            List<Container> NonValuables = new List<Container>();
-            foreach (var container in containerStack)
-            {
-                if (container.Valuable == true)
-                {
-                    valuables.Add(container);
-                }
-                else
-                {
-                    NonValuables.Add(container);
-                }
-            }
-
-            NonValuables = NonValuables.OrderByDesc
-
-            foreach (var container in NonValuables)
-            {
-
-            }
-            */
         }
     }
 }
