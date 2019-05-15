@@ -93,7 +93,7 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        private bool EvenMiddle(int lenghtShip)
+        public bool EvenMiddle(int lenghtShip)
         {
             if ((lenghtShip % 2) == 0 && lenghtShip != 1 && lenghtShip != 3)
             {
