@@ -62,30 +62,6 @@ namespace ContainerOpdrachtVersion3
                 }
             }
             return ContainerRows;
-
-
-            /*ContainerRows = containerRows;
-            Array.Clear(containerRows, 0, containerRows.Length);
-            containersCouldntAddToShip.Clear();
-            shipBalanceLogic.ResetWeight();
-            foreach (Container container in containersLookingForLocation)
-            {
-                containerCanBeAddedToArray = false;
-                containerAddedToArray = false;
-                for (int z = 0; z < MaxHeight && containerCanBeAddedToArray == false; z++)
-                {
-                    for (int j = 0; j < Width && containerCanBeAddedToArray == false; j++)
-                    {
-                        for (int i = 0; i < Lenght && containerCanBeAddedToArray == false; i++)
-                        {
-                            CheckThisLocation(i, j, z, container, containersLookingForLocation);
-                        }
-                    }
-                }
-                IsTheContainerAddedToTheArray(containerCanBeAddedToArray, containerAddedToArray, container, containersCouldntAddToShip);
-            }
-            containerRows = containerOrderChanger.HighestWeightContainerAtTheBottem(containerRows);
-            */
         }
     }
 }

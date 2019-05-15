@@ -1,3 +1,25 @@
+VALUABLES ARE NOW PLACED FIRST KEEP THAT IN MIND!!!!
+
+
+TODO
+Unit tests
+More solid 
+Buggfixes
+
+
+
+Done
+max ontop of container (weight)
+Valuable only in the back or in the front
+Valuable must be on top
+Cooling in the front
+Weight left, right Middle
+
+
+
+
+
+
 in the ContainerRow you check logic for infront and behind you and sht
 
 in the containerColumn you check logic for stacks

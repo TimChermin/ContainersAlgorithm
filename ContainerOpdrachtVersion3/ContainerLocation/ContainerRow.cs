@@ -8,7 +8,6 @@ namespace ContainerOpdrachtVersion3
 {
     public class ContainerRow
     {
-        private int rowNr;
         private int columnNr;
         private int lenght;
         private int width;
@@ -35,8 +34,6 @@ namespace ContainerOpdrachtVersion3
 
         public bool TryToPlaceContainer(Container container)
         {
-            // checks?
-
             if (TryToPlaceContainerColumn(container) == true)
             {
                 return true;
@@ -46,10 +43,10 @@ namespace ContainerOpdrachtVersion3
 
         private bool TryToPlaceContainerColumn(Container container)
         {
-            columnNr = 0;
+            columnNr = 1;
             foreach (ContainerColumn column in ContainerColumns)
             {
-                if (IfTheContainerHasCoolingIsItInfront(container, columnNr) == true)
+                if (IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(container, columnNr, ContainerColumns.Count()) == true)
                 {
                     if (column.TryToPlaceContainer(container) == true)
                     {
@@ -61,13 +58,21 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        public bool IfTheContainerHasCoolingIsItInfront(Container container, int columnNr)
+        public bool IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(Container container, int columnNr, int columnCount)
         {
-            if (container.Cooling == true && columnNr != 0)
+            if (container.Cooling == true && columnNr == 1)
             {
-                return false;
+                return true;
             }
-            return true;
+            else if (container.Valuable == true && (columnNr == 1 || columnNr == columnCount))
+            {
+                return true;
+            }
+            else if (container.Valuable == false && container.Cooling == false)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }
