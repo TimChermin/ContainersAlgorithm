@@ -1,11 +1,20 @@
+VALUABLES ARE NOW PLACED FIRST KEEP THAT IN MIND!!!!
+
+
 TODO
-Valuable only in the back or in the front
-Valuable must be on top
+Unit tests
+More solid 
+Buggfixes
 
 
 
 Done
 max ontop of container (weight)
+Valuable only in the back or in the front
+Valuable must be on top
+Cooling in the front
+Weight left, right Middle
+
 
 
 

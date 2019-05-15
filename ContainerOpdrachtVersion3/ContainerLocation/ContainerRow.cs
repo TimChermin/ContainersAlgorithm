@@ -8,7 +8,6 @@ namespace ContainerOpdrachtVersion3
 {
     public class ContainerRow
     {
-        private int rowNr;
         private int columnNr;
         private int lenght;
         private int width;

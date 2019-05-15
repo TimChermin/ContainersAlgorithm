@@ -43,11 +43,11 @@ namespace ContainerOpdrachtVersion3
                 return false;
             }
 
-            if (EvenMiddle(Lenght) == true /*&& IsTheShipEmpty(containersOnShip) >= 1*/)
+            if (EvenMiddle(Lenght) == true && IsTheShipEmpty(containersOnShip) >= 1)
             {
                 return WillThisLocationKeepTheBalanceOfTheShipWithEvenMiddle(i, container);
             }
-            else if (/*IsTheShipEmpty(containersOnShip) >= 1 &&*/ Middle != 0 && EvenMiddle(Lenght) == false)
+            else if (IsTheShipEmpty(containersOnShip) >= 1 && Middle != 0 && EvenMiddle(Lenght) == false)
             {
                 return WillThisLocationKeepTheBalanceOfTheShipWithUnEvenMiddle(i, container);
             }
@@ -98,7 +98,6 @@ namespace ContainerOpdrachtVersion3
             if ((lenghtShip % 2) == 0 && lenghtShip != 1 && lenghtShip != 3)
             {
                 Middle = (lenghtShip / 2);
-                //even nr
                 return true;
             }
 
@@ -118,22 +117,16 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        /*public int IsTheShipEmpty(List<Container> containersOnShip)
+        public int IsTheShipEmpty(List<Container> containersOnShip)
         {
             int shipCount = 0;
             foreach (Container container in containersOnShip)
             {
-                foreach (Container containerInArray in shipArray)
-                {
-                    if (container == containerInArray)
-                    {
-                        shipCount++;
-                    }
-                }
+                shipCount++;
             }
             return shipCount;
         }
-        */
+        
 
         public void ResetWeight()
         {
