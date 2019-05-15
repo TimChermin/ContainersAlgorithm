@@ -21,7 +21,7 @@ namespace ContainerOpdrachtVersion3
 
         public bool TryToPlaceContainer(Container container)
         {
-            if (containerStack.Count + 1 > maxHeight)
+            if (containerStack.Count + 1 > maxHeight || AddingContainerWouldNotGoOverMaxWeight(container) == false)
             {
                 return false;
             }
@@ -45,6 +45,25 @@ namespace ContainerOpdrachtVersion3
             }
             return false;
         }
-        
+
+        public bool AddingContainerWouldNotGoOverMaxWeight(Container container)
+        {
+            int weight = 0;
+            int containerCount = 0;
+            foreach (var containerInStack in containerStack)
+            {
+                if (containerCount > 0)
+                {
+                    weight += container.Weight;
+                }
+                containerCount++;
+            }
+
+            if ((weight + container.Weight) > 120)
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
