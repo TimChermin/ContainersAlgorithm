@@ -18,16 +18,7 @@ namespace ContainerOpdrachtVersion3
         public int Weight { get; set; }
         public bool Valuable { get; set; }
         public bool Cooling { get; set; }
-
-        public bool DoesTheContainerHaveCoolingAndIsItInFront(int j)
-        {
-            if (Cooling == true && j != 0)
-            {
-                return false;
-            }
-            return true;
-        }
-
+        
         public override string ToString()
         {
             string totalString = "";

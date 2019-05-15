@@ -47,7 +47,6 @@ namespace ContainerOpdrachtVersion3
             }
             containersNotOnShip.Clear();
 
-            //add the containers in the right order
             foreach (Container container in containerCoolingAndValuableNotOnShip)
             {
                 containersNotOnShip.Add(container);
@@ -65,7 +64,6 @@ namespace ContainerOpdrachtVersion3
                 containersNotOnShip.Add(container);
             }
             
-
             ClearLists();
             return containersNotOnShip;
         }

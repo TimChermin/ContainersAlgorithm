@@ -8,16 +8,12 @@ namespace ContainerOpdrachtVersion3
 {
     public class ShipBalanceLogic
     {
-        public ShipBalanceLogic(int lenght, int width, int maxHeight, int maxWeight)
+        public ShipBalanceLogic(int lenght, int maxWeight)
         {
             this.Lenght = lenght;
-            this.Width = width;
-            this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
         }
-
-        public int MaxHeight { get; set; }
-        public int Width { get; set; }
+        
         public int MaxWeight { get; set; }
         public int Weight { get; set; }
         public int WeightLeft { get; set; }
@@ -26,16 +22,10 @@ namespace ContainerOpdrachtVersion3
         public int Middle { get; set; }
         public bool HasEvenMiddle { get; set; }
         public int Lenght { get; set; }
-        public ContainerRow[] ContainerRows { get; set; }
 
-
-
-
-
-        // should check if i can add on a location with the weight
+        
         public bool WillThisLocationKeepTheBalanceOfTheShip(int i, Container container, List<Container> containersOnShip)
         {
-            //this could contain buggs
             bool MiddleIsEven = EvenMiddle(Lenght);
 
             if (WeightLeft + WeightMiddle + WeightRight + container.Weight > MaxWeight)
@@ -150,6 +140,7 @@ namespace ContainerOpdrachtVersion3
             {
                 WeightRight += container.Weight;
             }
+            Weight += container.Weight;
         }
     }
 }

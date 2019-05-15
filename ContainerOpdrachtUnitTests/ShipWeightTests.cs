@@ -2,23 +2,14 @@
 using System.Collections.Generic;
 using Xunit;
 using ContainerOpdrachtVersion3;
+using ContainerOpdrachtVersion3.Logic;
 
 namespace UnitTests
 {
     public class ShipWeightTests
     {
-        Container[,,] shipArray;
-        Container[,,] shipArrayExtra;
-        private ShipBalanceLogic shipBalanceLogic;
-        Ship ship;
-        Container cont;
-        Container cont2;
-
-
         public ShipWeightTests()
         {
-            ship = new Ship(5, 4, 5, 1000);
-            shipBalanceLogic = new ShipBalanceLogic(4, 5, 5, 1000);
         }
 
 
@@ -26,74 +17,104 @@ namespace UnitTests
         public void Should_CheckContainerWeightForUnEvenAndEvenMiddle_When_AddingAContainer()
         {
             //Arrange
-            Ship ship = new Ship(1, 4, 5, 1000);
-            Ship ship2 = new Ship(2, 4, 5, 1000);
-            cont = new Container(20, false, false);
-            ship.Middle = 4;
+            ShipBalanceLogic shipBalanceLogic = new ShipBalanceLogic(5, 40);
 
             //Act
+            bool resultNotEven = shipBalanceLogic.EvenMiddle(1);
+            bool resultEven = shipBalanceLogic.EvenMiddle(2);
 
             //Assert
-            Assert.True(shipBalanceLogic.EvenMiddle(1) == false);
-            Assert.True(shipBalanceLogic.EvenMiddle(2) == true);
+            Assert.False(resultNotEven);
+            Assert.True(resultEven);
         }
 
         [Fact]
         public void Should_AddTheContainerWeightToTheShip_When_AddingContainerWeight()
         {
             //Arrange
-            shipArrayExtra = new Container[200, 400, 40];
-            Ship ship = new Ship(2, 4, 5, 1000);
-            for (int i = 0; i < 20; i++)
-            {
-                ship.AddContainer(20, false, false);
-            }
+            ShipBalanceLogic balanceLogic = new ShipBalanceLogic(6, 40);
+            balanceLogic.Middle = 3;
 
             //Act
-            ship.SortListContainersNotOnShip(ship.ContainersTemp);
-            ship.LookForLocationPerContainer();
+            balanceLogic.AddContainerWeight(new Container(20, false, false), 1);
+            balanceLogic.AddContainerWeight(new Container(20, false, false), 3);
+            balanceLogic.AddContainerWeight(new Container(20, false, false), 6);
 
             //Assert
-            //Assert.True(ship.AddContainerWeightToShipWeight(0, cont = new Container(20, false, false), ship.ContainersOnShip));
-        }
-
-        [Fact]
-        public void Should_ReturnTrue_When_TheContainerWithTheHighestWeightIsAtTheBottem()
-        {
-            //Arrange
-            shipArray = new Container[1, 1, 5];
-            ship = new Ship(1, 1, 5, 1000);
-            shipArray[0, 0, 0] = cont = new Container(25, false, false);
-            shipArray[0, 0, 1] = cont = new Container(20, true, false);
-            shipArray[0, 0, 2] = cont2 = new Container(30, false, false);
-
-
-            //Act
-            //shipArray = containerOrderChanger.HighestWeightContainerAtTheBottem(shipArray);
-
-            //Assert
-            //Assert.True(shipArray[0, 0, 0] == cont2);
+            Assert.True(balanceLogic.Weight == 60);
+            Assert.True(balanceLogic.WeightLeft == 20);
+            Assert.True(balanceLogic.WeightRight == 20);
         }
 
 
         [Fact]
-        public void Should_AddTheContainerWeightToTheShip_When_AddingContainersToTheShip()
+        public void Should_ReturnContainerCound_When_CheckingIfTheShipIsEmpty()
         {
             //Arrange
-            shipArray = new Container[2, 2, 7];
-            for (int i = 0; i < 6; i++)
-            {
-                shipArray[0, 0, i] = cont = new Container(20, false, true);
-            }
-            Ship ship = new Ship(5, 4, 5, 1000);
-            cont = new Container(30, false, true);
-            cont2 = new Container(5, false, true);
+            ShipBalanceLogic balanceLogic = new ShipBalanceLogic(6, 40);
+            List<Container> containers = new List<Container>();
+            List<Container> containersEmpty = new List<Container>();
+            containers.Add(new Container(5, true, true));
+            containers.Add(new Container(5, true, true));
 
             //Act
+            int count = balanceLogic.IsTheShipEmpty(containers);
+            int emptyCount = balanceLogic.IsTheShipEmpty(containersEmpty);
 
             //Assert
-            //Assert.True(containerLocationAvailability.WillThisNotGoOverTheMaxWeightOnTopOfAContainer(0, 0, 6, cont, shipArray) == false);
-            //Assert.True(containerLocationAvailability.WillThisNotGoOverTheMaxWeightOnTopOfAContainer(0, 0, 6, cont2, shipArray) == true);
+            Assert.True(count == 2);
+            Assert.True(emptyCount == 0);
         }
+
+        [Fact]
+        public void Should_ReturnTrue_WhenCheckingIfTheRightLocationWillKeepTheBalanceOfTheShip()
+        {
+            //Arrange
+            ShipBalanceLogic balanceLogic = new ShipBalanceLogic(6, 400);
+            ShipBalanceLogic balanceLogic2 = new ShipBalanceLogic(6, 400);
+            balanceLogic2.WeightLeft += 30;
+            List<Container> containers = new List<Container>();
+            Container container = new Container(20, false, false);
+            containers.Add(container);
+
+            //Act
+            bool keepsBalance = balanceLogic.WillThisLocationKeepTheBalanceOfTheShip(1, container, containers);
+            bool keepsBalance2 = balanceLogic.WillThisLocationKeepTheBalanceOfTheShip(6, container, containers);
+
+            bool keepsBalance3 = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(6, container, containers);
+            bool DoesntKeepBalance = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(2, container, containers);
+            bool DoesntkeepBalance2 = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(1, container, containers);
+
+            //Assert
+            Assert.True(keepsBalance);
+            Assert.True(keepsBalance2);
+            Assert.True(keepsBalance3);
+            Assert.False(DoesntKeepBalance);
+            Assert.False(DoesntkeepBalance2);
+        }
+
+        [Fact]
+        public void Should_ReturnTrue_WhenAddingAContainerWontGoOverMaxWeightOnTopOfOne()
+        {
+            //Arrange
+            ContainerStackLogic stackLogic = new ContainerStackLogic(6);
+            ContainerStackLogic stackLogic2 = new ContainerStackLogic(6);
+            Container container = new Container(30, false, false);
+            stackLogic.containerStack.Add(container);
+            stackLogic.containerStack.Add(container);
+            stackLogic.containerStack.Add(container);
+            stackLogic.containerStack.Add(container);
+
+            //Act
+            stackLogic.CountStack();
+            bool cantAdd = stackLogic.AddingContainerWouldNotGoOverMaxWeight(container);
+            bool canAdd = stackLogic2.AddingContainerWouldNotGoOverMaxWeight(container);
+
+            //Assert
+            Assert.True(cantAdd);
+            Assert.True(canAdd);
+        }
+
+
     }
 }

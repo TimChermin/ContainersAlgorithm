@@ -18,16 +18,13 @@ namespace ContainerOpdrachtVersion3
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
-            ContainerRows = new ContainerRow[Lenght]; //misschien lenght
+            ContainerRows = new ContainerRow[Lenght];
             CreateRows();
 
-            shipBalanceLogic = new ShipBalanceLogic(lenght, width, maxHeight, maxWeight);
-            containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight, ContainerRows, shipBalanceLogic);
+            shipBalanceLogic = new ShipBalanceLogic(lenght, maxWeight);
+            containerLocationFinder = new ContainerLocationFinder(lenght, ContainerRows, shipBalanceLogic);
             containerListSorter = new ContainerListSorter();
-
             
-
-            ContainersOnShip = new List<Container>();
             ContainersTemp = new List<Container>();
             ContainersNotOnShip = new List<Container>();
             ContainersCouldntAddToShip = new List<Container>();
@@ -38,7 +35,6 @@ namespace ContainerOpdrachtVersion3
         public List<Container> ContainersCouldntAddToShip { get; set; }
         public List<Container> ContainersNotOnShip { get; set; }
         public List<Container> ContainersLookingForLocation { get; set; }
-        public List<Container> ContainersOnShip { get; set; }
         public int MaxHeight { get; set; }
         public int Width { get; set; }
         public int MaxWeight { get; set; }
@@ -46,11 +42,10 @@ namespace ContainerOpdrachtVersion3
         public int WeightLeft { get; set; }
         public int WeightRight { get; set; }
         public int WeightMiddle { get; set; }
-        public int Middle { get; set; }
         public int Lenght { get; set; }
         public ContainerRow[] ContainerRows { get; set; }
 
-        public void CreateRows() // de garbage methode van wessel
+        public void CreateRows()
         {
             for (int l = 0; l < Lenght; l++)
             {
