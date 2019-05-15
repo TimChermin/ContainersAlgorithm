@@ -69,7 +69,7 @@ namespace ContainerOpdrachtVersion3
             }
             containersOnLocation.Clear();
         }
-
+        /*
         public ContainerRow[] ReOrderLocationWhenAddingOnCoolingValuable(int i, int j, int z, ContainerRow[] containerRows)
         {
             foreach (Container containerValuable in ContainersValuableOnLocation)
@@ -85,5 +85,6 @@ namespace ContainerOpdrachtVersion3
             }
             return shipArray;
         }
+        */
     }
 }

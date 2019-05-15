@@ -10,6 +10,7 @@ namespace ContainerOpdrachtVersion3
     {
         private ContainerListSorter containerListSorter;
         private ContainerLocationFinder containerLocationFinder;
+        private ShipBalanceLogic shipBalanceLogic;
 
         public Ship(int lenght, int width, int maxHeight, int maxWeight)
         {
@@ -17,10 +18,14 @@ namespace ContainerOpdrachtVersion3
             this.Width = width;
             this.MaxHeight = maxHeight;
             this.MaxWeight = maxWeight;
-            ContainerRows = new ContainerRow[width]; //misschien lenght
+            ContainerRows = new ContainerRow[Lenght]; //misschien lenght
+            CreateRows();
 
-            containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight, ContainerRows);
+            shipBalanceLogic = new ShipBalanceLogic(lenght, width, maxHeight, maxWeight);
+            containerLocationFinder = new ContainerLocationFinder(lenght, width, maxHeight, maxWeight, ContainerRows, shipBalanceLogic);
             containerListSorter = new ContainerListSorter();
+
+            
 
             ContainersOnShip = new List<Container>();
             ContainersTemp = new List<Container>();
@@ -45,6 +50,13 @@ namespace ContainerOpdrachtVersion3
         public int Lenght { get; set; }
         public ContainerRow[] ContainerRows { get; set; }
 
+        public void CreateRows() // de garbage methode van wessel
+        {
+            for (int l = 0; l < Lenght; l++)
+            {
+                ContainerRows[l] = new ContainerRow(Lenght, Width, MaxHeight);
+            }
+        }
 
         public void AddContainer(int weight, bool valuable, bool cooling)
         {
@@ -61,6 +73,7 @@ namespace ContainerOpdrachtVersion3
         public void LookForLocationPerContainer()
         {
             ContainerRows = containerLocationFinder.LookForLocationPerContainer(ContainerRows, ContainersLookingForLocation, ContainersCouldntAddToShip);
+            GetShipBalance();
         }
         
         public void ClearContainersLists()
@@ -73,5 +86,15 @@ namespace ContainerOpdrachtVersion3
         {
             return containerLocationFinder.ContainersOnShip;
         }
+
+        public void GetShipBalance()
+        {
+            shipBalanceLogic = containerLocationFinder.ShipBalanceLogic;
+            Weight = containerLocationFinder.ShipBalanceLogic.Weight;
+            WeightLeft = containerLocationFinder.ShipBalanceLogic.WeightLeft;
+            WeightRight = containerLocationFinder.ShipBalanceLogic.WeightRight;
+            WeightMiddle = containerLocationFinder.ShipBalanceLogic.WeightMiddle;
+        }
+        
     }
 }
