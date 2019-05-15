@@ -48,15 +48,11 @@ namespace ContainerOpdrachtVersion3
             containersNotOnShip.Clear();
 
             //add the containers in the right order
-            foreach (Container container in containerCoolingNotOnShip)
-            {
-                containersNotOnShip.Add(container);
-            }
             foreach (Container container in containerCoolingAndValuableNotOnShip)
             {
                 containersNotOnShip.Add(container);
             }
-            foreach (Container container in temp)
+            foreach (Container container in containerCoolingNotOnShip)
             {
                 containersNotOnShip.Add(container);
             }
@@ -64,6 +60,11 @@ namespace ContainerOpdrachtVersion3
             {
                 containersNotOnShip.Add(container);
             }
+            foreach (Container container in temp)
+            {
+                containersNotOnShip.Add(container);
+            }
+            
 
             ClearLists();
             return containersNotOnShip;

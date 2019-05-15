@@ -1,3 +1,16 @@
+TODO
+Valuable only in the back or in the front
+Valuable must be on top
+
+
+
+Done
+max ontop of container (weight)
+
+
+
+
+
 in the ContainerRow you check logic for infront and behind you and sht
 
 in the containerColumn you check logic for stacks

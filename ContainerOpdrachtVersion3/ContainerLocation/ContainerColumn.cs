@@ -11,6 +11,8 @@ namespace ContainerOpdrachtVersion3
         public List<Container> containerStack;
         private ContainerValuableLogic containerValuableLogic;
         private int maxHeight;
+        private int weight;
+        private int valuableCount;
 
         public ContainerColumn(int lenght, int width, int maxHeight)
         {
@@ -21,7 +23,7 @@ namespace ContainerOpdrachtVersion3
 
         public bool TryToPlaceContainer(Container container)
         {
-            if (containerStack.Count + 1 > maxHeight || AddingContainerWouldNotGoOverMaxWeight(container) == false)
+            if (containerStack.Count + 1 > maxHeight || AddingContainerWouldNotGoOverMaxWeight(container) == false || PlaceingWontDestroyValuables(container) == false)
             {
                 return false;
             }
@@ -32,6 +34,7 @@ namespace ContainerOpdrachtVersion3
         private void PlaceContainer(Container container)
         {
             containerStack.Add(container);
+            ReOrderStack();
         }
 
         public bool DoesThisLocationContainAContainer(int z)
@@ -48,22 +51,67 @@ namespace ContainerOpdrachtVersion3
 
         public bool AddingContainerWouldNotGoOverMaxWeight(Container container)
         {
-            int weight = 0;
-            int containerCount = 0;
-            foreach (var containerInStack in containerStack)
-            {
-                if (containerCount > 0)
-                {
-                    weight += container.Weight;
-                }
-                containerCount++;
-            }
-
+            CountStack();
             if ((weight + container.Weight) > 120)
             {
                 return false;
             }
             return true;
+        }
+
+        public bool PlaceingWontDestroyValuables(Container container)
+        {
+            CountStack();
+            if (valuableCount != 0 && container.Valuable == true)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public void CountStack()
+        {
+            valuableCount = 0;
+            weight = 0;
+            foreach (var containerInStack in containerStack)
+            {
+                if (containerStack.IndexOf(containerInStack) != 0)
+                {
+                    weight += containerInStack.Weight;
+                }
+                if (containerInStack.Valuable == true)
+                {
+                    valuableCount++;
+                }
+            }
+        }
+
+        public void ReOrderStack()
+        {
+            containerStack = containerStack.OrderByDescending(container => container.Weight).ToList();
+            containerStack = containerStack.OrderBy(container => container.Valuable).ToList();
+            containerStack = containerStack;
+            /*List<Container> valuables = new List<Container>();
+            List<Container> NonValuables = new List<Container>();
+            foreach (var container in containerStack)
+            {
+                if (container.Valuable == true)
+                {
+                    valuables.Add(container);
+                }
+                else
+                {
+                    NonValuables.Add(container);
+                }
+            }
+
+            NonValuables = NonValuables.OrderByDesc
+
+            foreach (var container in NonValuables)
+            {
+
+            }
+            */
         }
     }
 }
