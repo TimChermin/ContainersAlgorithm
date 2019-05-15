@@ -9,25 +9,15 @@ namespace ContainerOpdrachtVersion3
     class ContainerLocationFinder
     {
         private ContainerRow[] containerRows;
-        private ContainerListSorter containerListSorter;
 
-        public ContainerLocationFinder(int lenght, int width, int maxHeight, int maxWeight, ContainerRow[] containerRows, ShipBalanceLogic shipBalanceLogic)
+        public ContainerLocationFinder(int lenght, ContainerRow[] containerRows, ShipBalanceLogic shipBalanceLogic)
         {
-            this.Lenght = lenght;
-            this.Width = width;
-            this.MaxHeight = maxHeight;
-            this.MaxWeight = maxWeight;
             this.ContainerRows = containerRows;
             ShipBalanceLogic = shipBalanceLogic;
-            containerListSorter = new ContainerListSorter();
             ContainersOnShip = new List<Container>();
         }
         
         public List<Container> ContainersOnShip { get; set; }
-        public int MaxHeight { get; set; }
-        public int Width { get; set; }
-        public int MaxWeight { get; set; }
-        public int Lenght { get; set; }
         internal ContainerRow[] ContainerRows { get => containerRows; set => containerRows = value; }
         public ShipBalanceLogic ShipBalanceLogic { get; set; }
 

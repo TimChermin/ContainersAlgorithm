@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContainerLocation\ContainerStackLogic.cs" />
     <Compile Include="NonLogic\Container.cs" />
     <Compile Include="ContainerLocation\ContainerColumn.cs" />
     <Compile Include="Logic\ContainerListSorter.cs" />
