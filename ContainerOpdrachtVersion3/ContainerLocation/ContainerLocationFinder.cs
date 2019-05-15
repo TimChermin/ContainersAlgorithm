@@ -8,8 +8,6 @@ namespace ContainerOpdrachtVersion3
 {
     class ContainerLocationFinder
     {
-        private bool containerCanBeAddedToArray = false;
-        private bool containerAddedToArray = false;
         private ContainerRow[] containerRows;
         private ContainerListSorter containerListSorter;
 

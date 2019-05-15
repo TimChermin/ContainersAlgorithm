@@ -49,20 +49,25 @@ namespace ContainerOpdrachtVersion3
             columnNr = 0;
             foreach (ContainerColumn column in ContainerColumns)
             {
-                if (column.TryToPlaceContainer(container) == true)
+                if (IfTheContainerHasCoolingIsItInfront(container, columnNr) == true)
                 {
-                    return true;
+                    if (column.TryToPlaceContainer(container) == true)
+                    {
+                        return true;
+                    }
                 }
                 columnNr++;
             }
             return false;
         }
 
-        /*public void PlaceContainer(Container container)
+        public bool IfTheContainerHasCoolingIsItInfront(Container container, int columnNr)
         {
-            ContainerColumns[columnNr].PlaceContainer(container);
+            if (container.Cooling == true && columnNr != 0)
+            {
+                return false;
+            }
+            return true;
         }
-        */
-
     }
 }

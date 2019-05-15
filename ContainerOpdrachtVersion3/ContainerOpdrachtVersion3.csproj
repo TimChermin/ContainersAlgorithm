@@ -47,11 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NonLogic\Container.cs" />
-    <Compile Include="Logic\ContainerColumn.cs" />
+    <Compile Include="ContainerLocation\ContainerColumn.cs" />
     <Compile Include="Logic\ContainerListSorter.cs" />
-    <Compile Include="Logic\ContainerLocationFinder.cs" />
+    <Compile Include="ContainerLocation\ContainerLocationFinder.cs" />
     <Compile Include="Logic\ContainerOrderChanger.cs" />
-    <Compile Include="Logic\ContainerRow.cs" />
+    <Compile Include="ContainerLocation\ContainerRow.cs" />
     <Compile Include="Logic\ContainerValuableLogic.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
