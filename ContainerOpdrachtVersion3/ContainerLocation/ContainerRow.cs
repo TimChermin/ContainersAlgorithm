@@ -64,7 +64,7 @@ namespace ContainerOpdrachtVersion3
             {
                 return true;
             }
-            else if (container.Valuable == true && (columnNr == 1 || columnNr == columnCount))
+            else if (container.Valuable == true && (columnNr == 1 || columnNr == columnCount) && container.Cooling == false)
             {
                 return true;
             }
