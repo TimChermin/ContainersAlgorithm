@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using Xunit;
 using ContainerOpdrachtVersion3;
-using ContainerOpdrachtVersion3.Logic;
 
 namespace UnitTests
 {
     public class ShipWeightTests
     {
-        public ShipWeightTests()
-        {
-        }
-
-
         [Fact]
         public void Should_CheckContainerWeightForUnEvenAndEvenMiddle_When_AddingAContainer()
         {
@@ -97,18 +91,18 @@ namespace UnitTests
         public void Should_ReturnTrue_WhenAddingAContainerWontGoOverMaxWeightOnTopOfOne()
         {
             //Arrange
-            ContainerStackLogic stackLogic = new ContainerStackLogic(6);
-            ContainerStackLogic stackLogic2 = new ContainerStackLogic(6);
+            ContainerColumn column = new ContainerColumn(5, 5, 6);
+            ContainerColumn column2 = new ContainerColumn(5, 5, 6);
             Container container = new Container(30, false, false);
-            stackLogic.containerStack.Add(container);
-            stackLogic.containerStack.Add(container);
-            stackLogic.containerStack.Add(container);
-            stackLogic.containerStack.Add(container);
+            column.containerStack.Add(container);
+            column.containerStack.Add(container);
+            column.containerStack.Add(container);
+            column.containerStack.Add(container);
 
             //Act
-            stackLogic.CountStack();
-            bool cantAdd = stackLogic.AddingContainerWouldNotGoOverMaxWeight(container);
-            bool canAdd = stackLogic2.AddingContainerWouldNotGoOverMaxWeight(container);
+            column.CountStack();
+            bool cantAdd = column.AddingContainerWouldNotGoOverMaxWeight(container);
+            bool canAdd = column2.AddingContainerWouldNotGoOverMaxWeight(container);
 
             //Assert
             Assert.True(cantAdd);

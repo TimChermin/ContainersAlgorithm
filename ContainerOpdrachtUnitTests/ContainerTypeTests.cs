@@ -1,5 +1,4 @@
 using ContainerOpdrachtVersion3;
-using ContainerOpdrachtVersion3.Logic;
 using System;
 using System.Collections.Generic;
 using Xunit;
@@ -60,14 +59,14 @@ namespace UnitTests
         public void Should_ReturnFalse_When_PlaceingOnValuablesOnValuables()
         {
             //Arrange
+            ContainerColumn column = new ContainerColumn(5, 5, 6);
             Container containerCoolAndVal = new Container(4, true, true);
             Container containerVal = new Container(4, true, false);
-            ContainerStackLogic stackLogic = new ContainerStackLogic(3);
-            stackLogic.containerStack.Add(new Container(4, true, true));
+            column.containerStack.Add(new Container(4, true, true));
             
             //Act
-            bool resultVal = stackLogic.PlaceingWontDestroyValuables(containerVal);
-            bool resultCoolAndVal = stackLogic.PlaceingWontDestroyValuables(containerCoolAndVal);
+            bool resultVal = column.PlaceingWontDestroyValuables(containerVal);
+            bool resultCoolAndVal = column.PlaceingWontDestroyValuables(containerCoolAndVal);
 
             //Assert
             Assert.False(resultVal);
@@ -78,14 +77,14 @@ namespace UnitTests
         public void Should_ReturnTrue_When_PlaceingValuablesOnAStackWithoutValuables()
         {
             //Arrange
+            ContainerColumn column = new ContainerColumn(5, 5, 6);
             Container containerCoolAndVal = new Container(4, true, true);
             Container containerVal = new Container(4, true, false);
-            ContainerStackLogic stackLogic = new ContainerStackLogic(3);
-            stackLogic.containerStack.Add(new Container(4, false, true));
+            column.containerStack.Add(new Container(4, false, true));
 
             //Act
-            bool resultVal = stackLogic.PlaceingWontDestroyValuables(containerVal);
-            bool resultCoolAndVal = stackLogic.PlaceingWontDestroyValuables(containerCoolAndVal);
+            bool resultVal = column.PlaceingWontDestroyValuables(containerVal);
+            bool resultCoolAndVal = column.PlaceingWontDestroyValuables(containerCoolAndVal);
 
             //Assert
             Assert.True(resultVal);

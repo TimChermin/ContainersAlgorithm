@@ -8,7 +8,6 @@ namespace ContainerOpdrachtVersion3
 {
     public class ContainerColumn
     {
-        public List<Container> containerStack;
         private int maxHeight;
         private int weight;
         private int valuableCount;
@@ -18,6 +17,8 @@ namespace ContainerOpdrachtVersion3
             containerStack = new List<Container>();
             this.maxHeight = maxHeight;
         }
+
+        public List<Container> containerStack { get; set; }
 
         public bool TryToPlaceContainer(Container container)
         {
@@ -44,7 +45,7 @@ namespace ContainerOpdrachtVersion3
             return true;
         }
 
-        private void CountStack()
+        public void CountStack()
         {
             valuableCount = 0;
             weight = 0;
@@ -61,7 +62,7 @@ namespace ContainerOpdrachtVersion3
             }
         }
 
-        private bool AddingContainerWouldNotGoOverMaxWeight(Container container)
+        public bool AddingContainerWouldNotGoOverMaxWeight(Container container)
         {
             CountStack();
             if ((weight + container.Weight) > 120)
@@ -71,7 +72,7 @@ namespace ContainerOpdrachtVersion3
             return true;
         }
 
-        private bool PlaceingWontDestroyValuables(Container container)
+        public bool PlaceingWontDestroyValuables(Container container)
         {
             CountStack();
             if (valuableCount != 0 && container.Valuable == true)
