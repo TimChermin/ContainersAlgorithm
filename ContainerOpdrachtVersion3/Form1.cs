@@ -22,18 +22,11 @@ namespace ContainerOpdrachtVersion3
 
         public void buttonAddContainer_Click(object sender, EventArgs e)
         {
-            List<Container> containersNotBesideTheShip = new List<Container>();
             for (int i = 0; i < Convert.ToInt32(numericUpDownAmountOfContainersToNotOnShip.Value); i++)
             {
                 ship.AddContainer(Convert.ToInt32(numericUpDownContainerWeight.Value), checkBoxValuable.Checked, checkBoxCooling.Checked);
-                containersNotBesideTheShip.Add(new Container(Convert.ToInt32(numericUpDownContainerWeight.Value), checkBoxValuable.Checked, checkBoxCooling.Checked));
             }
-            ship.ContainersTemp.Clear();
-            foreach (Container container in containersNotBesideTheShip)
-            {
-                ship.ContainersNotOnShip.Add(container);
-            }
-            ship.SortListContainersNotOnShip(ship.ContainersNotOnShip);
+            ship.SortListContainersNotOnShip(ship.ContainersLookingForLocation);
             UpdateInterface();
         }
 
@@ -42,15 +35,8 @@ namespace ContainerOpdrachtVersion3
             int weight = ship.Weight;
             int WeightLeft = ship.WeightLeft;
             int WeightRight = ship.WeightRight;
-            ship.ClearContainersLists();
-            //make sure the valuable containers go last
-            foreach (Container container in ship.ContainersNotOnShip)
-            {
-                ship.ContainersLookingForLocation.Add(container);
-            }
+            ship.ContainersOnShip.Clear();
             ship.LookForLocationPerContainer();
-
-            //shipArray = ship.ShipArray;
             UpdateInterface();
         }
 
@@ -62,11 +48,7 @@ namespace ContainerOpdrachtVersion3
             int shipWidth = Convert.ToInt32(numericUpDownShipWidth.Value);
             int shipMaxHeight = Convert.ToInt32(numericUpDownShipHeight.Value);
             int shipMaxWeight = Convert.ToInt32(numericUpDownShipMaxWeight.Value);
-            //4 containers by 2 containers
-            //shipArray = new Container[shipLenght, shipWidth, shipMaxHeight];
             ship = new Ship(shipLenght, shipWidth, shipMaxHeight, shipMaxWeight);
-
-            //ship.ShipArray = shipArray;
 
             CreateNodes();
         }
@@ -109,9 +91,8 @@ namespace ContainerOpdrachtVersion3
             int columnNr = 0;
             int hightNr = 0;
 
-            foreach (Container container in ship.GetContainersOnShip())
+            foreach (Container container in ship.ContainersOnShip)
             {
-                bool containerAddedToArray = false;
                 rowNr = 0;
                 foreach (var row in ship.ContainerRows)
                 {
@@ -139,7 +120,7 @@ namespace ContainerOpdrachtVersion3
         private void GetContainersNotOnShip()
         {
             listBoxContainersNotOnShip.Items.Clear();
-            foreach (Container container in ship.ContainersNotOnShip)
+            foreach (Container container in ship.ContainersLookingForLocation)
             {
                 listBoxContainersNotOnShip.Items.Add(container);
             }

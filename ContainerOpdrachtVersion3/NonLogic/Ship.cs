@@ -19,20 +19,14 @@ namespace ContainerOpdrachtVersion3
             this.MaxWeight = maxWeight;
             ContainerRows = new ContainerRow[Lenght];
             CreateRows();
-
             shipBalanceLogic = new ShipBalanceLogic(lenght, maxWeight);
             containerListSorter = new ContainerListSorter();
-            
-            ContainersTemp = new List<Container>();
-            ContainersNotOnShip = new List<Container>();
             ContainersCouldntAddToShip = new List<Container>();
             ContainersLookingForLocation = new List<Container>();
             ContainersOnShip = new List<Container>();
         }
         
-        public List<Container> ContainersTemp { get; set; }
         public List<Container> ContainersCouldntAddToShip { get; set; }
-        public List<Container> ContainersNotOnShip { get; set; }
         public List<Container> ContainersLookingForLocation { get; set; }
         public List<Container> ContainersOnShip { get; set; }
         public int MaxHeight { get; set; }
@@ -56,30 +50,19 @@ namespace ContainerOpdrachtVersion3
         public void AddContainer(int weight, bool valuable, bool cooling)
         {
             Container container = new Container(weight, valuable, cooling);
-            ContainersTemp.Add(container);
+            ContainersLookingForLocation.Add(container);
         }
 
         public void SortListContainersNotOnShip(List<Container> containersNotBesideTheShip)
         {
             containerListSorter.AddContainerTypeToItsList(containersNotBesideTheShip);
-            ContainersNotOnShip = containerListSorter.SortListContainersNotOnShip();
+            ContainersLookingForLocation = containerListSorter.SortListContainersNotOnShip();
         }
 
         public void LookForLocationPerContainer()
         {
             ContainerRows = LookForLocationPerContainerPerRow();
             GetShipBalance();
-        }
-        
-        public void ClearContainersLists()
-        {
-            ContainersLookingForLocation.Clear();
-            ContainersOnShip.Clear();
-        }
-
-        public List<Container> GetContainersOnShip()
-        {
-            return ContainersOnShip;
         }
 
         public void GetShipBalance()
