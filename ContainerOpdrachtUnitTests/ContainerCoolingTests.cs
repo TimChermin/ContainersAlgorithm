@@ -8,26 +8,59 @@ namespace UnitTests
     public class ContainerCoolingTests
     {
         [Fact]
-        public void Should_ReturnTrue_When_TheContainerHasCoolingAndIfItWillBePlacedInFront()
+        public void Should_ReturnTrue_When_TheContainerHasCoolingAndIsInfront()
         {
             //Arrange
-            Container containerCool = new Container(4, false, true);
-            Container container = new Container(4, false, false);
+            Container containerCooling = new Container(4, false, true);
+            ContainerRow row = new ContainerRow(5, 5, 5);
+            
+            //Act
+            bool resultCoolingInFront = row.CanPlaceCoolingOrValuables(containerCooling, 1, 5);
+
+            //Assert
+            Assert.True(resultCoolingInFront);
+        }
+
+        [Fact]
+        public void Should_ReturnFalse_When_TheContainerHasCoolingAndIsNotInfront()
+        {
+            //Arrange
+            Container containerCooling = new Container(4, false, true);
             ContainerRow row = new ContainerRow(5, 5, 5);
 
             //Act
-            bool resultCoolInFront = row.CanPlaceCoolingOrValuables(containerCool, 1, 5);
-            bool resultCoolNotInFront = row.CanPlaceCoolingOrValuables(containerCool, 2, 5);
-
-            bool resultContainer = row.CanPlaceCoolingOrValuables(container, 1, 5);
-            bool resultContainer2 = row.CanPlaceCoolingOrValuables(container, 2, 5);
+            bool resultCoolingNotInFront = row.CanPlaceCoolingOrValuables(containerCooling, 2, 5);
 
             //Assert
-            Assert.True(resultCoolInFront);
-            Assert.False(resultCoolNotInFront);
+            Assert.False(resultCoolingNotInFront);
+        }
 
-            Assert.True(resultContainer);
-            Assert.True(resultContainer2);
+        [Fact]
+        public void Should_ReturnFalse_When_TheContainerHasCoolingValuablesAndIsNotInfront()
+        {
+            //Arrange
+            Container containerCoolVal = new Container(4, true, true);
+            ContainerRow row = new ContainerRow(5, 5, 5);
+
+            //Act
+            bool resultCoolValNotInFront = row.CanPlaceCoolingOrValuables(containerCoolVal, 2, 5);
+
+            //Assert
+            Assert.False(resultCoolValNotInFront);
+        }
+
+        [Fact]
+        public void Should_ReturnTrue_When_TheContainerHasCoolingValuablesAndIsInfront()
+        {
+            //Arrange
+            Container containerCoolVal = new Container(4, true, true);
+            ContainerRow row = new ContainerRow(5, 5, 5);
+
+            //Act
+            bool resultCoolValInFront = row.CanPlaceCoolingOrValuables(containerCoolVal, 1, 5);
+
+            //Assert
+            Assert.True(resultCoolValInFront);
         }
     }
 }

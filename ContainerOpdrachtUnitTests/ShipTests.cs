@@ -7,17 +7,11 @@ namespace UnitTests
 {
     public class ShipTests
     {
-        Ship ship;
-
-        public ShipTests()
-        {
-            ship = new Ship(5, 5, 5, 1000);
-        }
-
         [Fact]
         public void Should_Add200ContainersToList_When_Adding200Containers()
         {
             //Arrange
+            Ship ship = new Ship(5, 5, 5, 1000);
             for (int i = 0; i < 200; i++)
             {
                 ship.AddContainer(20, false, false);
