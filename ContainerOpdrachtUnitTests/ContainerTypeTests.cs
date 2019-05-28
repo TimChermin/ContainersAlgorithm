@@ -18,12 +18,12 @@ namespace UnitTests
             ContainerRow row = new ContainerRow(5, 5, 5);
 
             //Act
-            bool resultCoolAndValInFront = row.IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(containerCoolAndVal, 1, 5);
-            bool resultCoolAndValNotInFront = row.IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(containerCoolAndVal, 2, 5);
+            bool resultCoolAndValInFront = row.CanPlaceCoolingOrValuables(containerCoolAndVal, 1, 5);
+            bool resultCoolAndValNotInFront = row.CanPlaceCoolingOrValuables(containerCoolAndVal, 2, 5);
 
-            bool resultValInFront = row.IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(containerVal, 1, 5);
-            bool resultValInBack = row.IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(containerVal, 5, 5);
-            bool resultValNotInFrontOrBack = row.IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(containerVal, 2, 5);
+            bool resultValInFront = row.CanPlaceCoolingOrValuables(containerVal, 1, 5);
+            bool resultValInBack = row.CanPlaceCoolingOrValuables(containerVal, 5, 5);
+            bool resultValNotInFrontOrBack = row.CanPlaceCoolingOrValuables(containerVal, 2, 5);
             
             //Assert
             Assert.True(resultCoolAndValInFront);

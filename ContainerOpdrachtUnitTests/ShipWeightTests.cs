@@ -8,7 +8,7 @@ namespace UnitTests
     public class ShipWeightTests
     {
         [Fact]
-        public void Should_CheckContainerWeightForUnEvenAndEvenMiddle_When_AddingAContainer()
+        public void Should_CheckContainerWeightForUnEvenAndHasEvenMiddle_When_AddingAContainer()
         {
             //Arrange
             ShipBalanceLogic shipBalanceLogic = new ShipBalanceLogic(5, 40);
@@ -61,7 +61,7 @@ namespace UnitTests
         }
 
         [Fact]
-        public void Should_ReturnTrue_WhenCheckingIfTheRightLocationWillKeepTheBalanceOfTheShip()
+        public void Should_ReturnTrue_WhenCheckingIfTheRightLocationWillStayBalancedOfTheShip()
         {
             //Arrange
             ShipBalanceLogic balanceLogic = new ShipBalanceLogic(6, 400);
@@ -72,12 +72,12 @@ namespace UnitTests
             containers.Add(container);
 
             //Act
-            bool keepsBalance = balanceLogic.WillThisLocationKeepTheBalanceOfTheShip(1, container, containers);
-            bool keepsBalance2 = balanceLogic.WillThisLocationKeepTheBalanceOfTheShip(6, container, containers);
+            bool keepsBalance = balanceLogic.WillStayBalanced(1, container, containers);
+            bool keepsBalance2 = balanceLogic.WillStayBalanced(6, container, containers);
 
-            bool keepsBalance3 = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(6, container, containers);
-            bool DoesntKeepBalance = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(2, container, containers);
-            bool DoesntkeepBalance2 = balanceLogic2.WillThisLocationKeepTheBalanceOfTheShip(1, container, containers);
+            bool keepsBalance3 = balanceLogic2.WillStayBalanced(6, container, containers);
+            bool DoesntKeepBalance = balanceLogic2.WillStayBalanced(2, container, containers);
+            bool DoesntkeepBalance2 = balanceLogic2.WillStayBalanced(1, container, containers);
 
             //Assert
             Assert.True(keepsBalance);
@@ -101,8 +101,8 @@ namespace UnitTests
 
             //Act
             column.CountStack();
-            bool cantAdd = column.AddingContainerWouldNotGoOverMaxWeight(container);
-            bool canAdd = column2.AddingContainerWouldNotGoOverMaxWeight(container);
+            bool cantAdd = column.AddingWouldNotGoOverMaxWeight(container);
+            bool canAdd = column2.AddingWouldNotGoOverMaxWeight(container);
 
             //Assert
             Assert.True(cantAdd);

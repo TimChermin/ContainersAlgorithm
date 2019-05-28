@@ -84,7 +84,7 @@ namespace ContainerOpdrachtVersion3
                 bool containerLocationFound = false;
                 foreach (ContainerRow row in ContainerRows)
                 {
-                    if (shipBalanceLogic.WillThisLocationKeepTheBalanceOfTheShip(rowNr, container, ContainersOnShip))
+                    if (shipBalanceLogic.WillStayBalanced(rowNr, container, ContainersOnShip))
                     {
                         if (row.TryToPlaceContainer(container) == true)
                         {
