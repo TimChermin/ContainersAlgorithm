@@ -22,7 +22,7 @@ namespace ContainerOpdrachtVersion3
 
         public bool TryToPlaceContainer(Container container)
         {
-            if (CanTheContainerBePlacedOnThisStack(container))
+            if (CanBePlacedOnThisStack(container))
             {
                 PlaceContainer(container);
                 return true;
@@ -36,9 +36,9 @@ namespace ContainerOpdrachtVersion3
             ReOrderStack();
         }
 
-        private bool CanTheContainerBePlacedOnThisStack(Container container)
+        private bool CanBePlacedOnThisStack(Container container)
         {
-            if (containerStack.Count + 1 > maxHeight || AddingContainerWouldNotGoOverMaxWeight(container) == false || PlaceingWontDestroyValuables(container) == false)
+            if (containerStack.Count + 1 > maxHeight || AddingWouldNotGoOverMaxWeight(container) == false || PlaceingWontDestroyValuables(container) == false)
             {
                 return false;
             }
@@ -62,7 +62,7 @@ namespace ContainerOpdrachtVersion3
             }
         }
 
-        public bool AddingContainerWouldNotGoOverMaxWeight(Container container)
+        public bool AddingWouldNotGoOverMaxWeight(Container container)
         {
             CountStack();
             if ((weight + container.Weight) > 120)
