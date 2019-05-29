@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Xunit;
 using ContainerOpdrachtVersion3;
 
-namespace UnitTests
+namespace ShipTests
 {
     public class ShipWeightTests
     {

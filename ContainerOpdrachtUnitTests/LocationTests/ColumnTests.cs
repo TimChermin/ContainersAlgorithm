@@ -3,11 +3,11 @@ using System;
 using System.Collections.Generic;
 using Xunit;
 
-namespace UnitTests
+namespace LocationTests
 {
-    public class RowTests
+    public class ColumnTests
     {
-        ContainerRow row = new ContainerRow(5, 5, 5);
+        ContainerColumn column = new ContainerColumn(5, 5, 5);
 
         [Fact]
         public void Should_ReturnTrue_When_TryingToPlaceCoolingContainers()
@@ -16,7 +16,7 @@ namespace UnitTests
             Container containerCooling = new Container(4, false, true);
 
             //Act
-            bool Placed = row.TryToPlaceContainer(containerCooling);
+            bool Placed = column.TryToPlaceContainer(containerCooling);
 
             //Assert
             Assert.True(Placed);
@@ -29,7 +29,7 @@ namespace UnitTests
             Container containerValuable = new Container(4, true, false);
 
             //Act
-            bool Placed = row.TryToPlaceContainer(containerValuable);
+            bool Placed = column.TryToPlaceContainer(containerValuable);
 
             //Assert
             Assert.True(Placed);
@@ -42,7 +42,7 @@ namespace UnitTests
             Container container = new Container(4, false, false);
 
             //Act
-            bool Placed = row.TryToPlaceContainer(container);
+            bool Placed = column.TryToPlaceContainer(container);
 
             //Assert
             Assert.True(Placed);
@@ -55,14 +55,14 @@ namespace UnitTests
             Container containerCoolVal = new Container(4, true, true);
 
             //Act
-            bool Placed = row.TryToPlaceContainer(containerCoolVal);
+            bool Placed = column.TryToPlaceContainer(containerCoolVal);
 
             //Assert
             Assert.True(Placed);
         }
 
         [Fact]
-        public void Should_ReturnFalse_When_TryingToPlaceOnAFullRow()
+        public void Should_ReturnFalse_When_TryingToPlaceOnAFullColumn()
         {
             //Arrange
             Container container = new Container(4, false, false);
