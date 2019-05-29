@@ -49,9 +49,10 @@ namespace ContainerOpdrachtVersion3
         {
             valuableCount = 0;
             weight = 0;
+            int containerCount = 0;
             foreach (var containerInStack in containerStack)
             {
-                if (containerStack.IndexOf(containerInStack) != 0)
+                if (containerCount != 0)
                 {
                     weight += containerInStack.Weight;
                 }
@@ -59,6 +60,7 @@ namespace ContainerOpdrachtVersion3
                 {
                     valuableCount++;
                 }
+                containerCount++;
             }
         }
 

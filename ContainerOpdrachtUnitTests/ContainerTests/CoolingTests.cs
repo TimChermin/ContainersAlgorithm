@@ -5,7 +5,7 @@ using Xunit;
 
 namespace UnitTests
 {
-    public class ContainerCoolingTests
+    public class CoolingTests
     {
         [Fact]
         public void Should_ReturnTrue_When_TheContainerHasCoolingAndIsInfront()

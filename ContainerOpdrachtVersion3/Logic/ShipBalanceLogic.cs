@@ -66,17 +66,18 @@ namespace ContainerOpdrachtVersion3
         {
             int totalLeftCheck = WeightLeft + container.Weight;
             int totalRightCheck = WeightRight + container.Weight;
+            int totalMidCheck = WeightMiddle + container.Weight;
             HasEvenMiddle = false;
 
             if (totalLeftCheck >= totalRightCheck && i > Middle)
             {
                 return true;
             }
-            else if (totalRightCheck > totalLeftCheck && i < Middle)
+            else if (totalRightCheck >= totalLeftCheck && i < Middle)
             {
                 return true;
             }
-            else if (i == Middle)
+            else if (Middle == i && totalMidCheck < totalRightCheck)
             {
                 return true;
             }
