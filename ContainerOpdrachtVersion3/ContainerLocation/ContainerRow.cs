@@ -46,7 +46,7 @@ namespace ContainerOpdrachtVersion3
             columnNr = 1;
             foreach (ContainerColumn column in ContainerColumns)
             {
-                if (IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(container, columnNr, ContainerColumns.Count()) == true)
+                if (CanPlaceCoolingOrValuables(container, columnNr, ContainerColumns.Count()) == true)
                 {
                     if (column.TryToPlaceContainer(container) == true)
                     {
@@ -58,7 +58,7 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        public bool IfTheContainerHasCoolingOrValuablesIsItInfrontOrInTheBack(Container container, int columnNr, int columnCount)
+        public bool CanPlaceCoolingOrValuables(Container container, int columnNr, int columnCount)
         {
             if (container.Cooling == true && columnNr == 1)
             {
@@ -74,5 +74,6 @@ namespace ContainerOpdrachtVersion3
             }
             return false;
         }
+
     }
 }

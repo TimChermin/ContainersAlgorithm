@@ -24,7 +24,7 @@ namespace ContainerOpdrachtVersion3
         public int Lenght { get; set; }
 
         
-        public bool WillThisLocationKeepTheBalanceOfTheShip(int i, Container container, List<Container> containersOnShip)
+        public bool WillStayBalanced(int i, Container container, List<Container> containersOnShip)
         {
             bool MiddleIsEven = EvenMiddle(Lenght);
 
@@ -35,17 +35,17 @@ namespace ContainerOpdrachtVersion3
 
             if (EvenMiddle(Lenght) == true && IsTheShipEmpty(containersOnShip) >= 1)
             {
-                return WillThisLocationKeepTheBalanceOfTheShipWithEvenMiddle(i, container);
+                return WillStayBalancedWithEvenMiddle(i, container);
             }
             else if (IsTheShipEmpty(containersOnShip) >= 1 && Middle != 0 && EvenMiddle(Lenght) == false)
             {
-                return WillThisLocationKeepTheBalanceOfTheShipWithUnEvenMiddle(i, container);
+                return WillStayBalancedWithUnEvenMiddle(i, container);
             }
             return true;
         }
 
 
-        private bool WillThisLocationKeepTheBalanceOfTheShipWithEvenMiddle(int i, Container container)
+        private bool WillStayBalancedWithEvenMiddle(int i, Container container)
         {
             int totalLeftCheck = WeightLeft + container.Weight;
             int totalRightCheck = WeightRight + container.Weight;
@@ -62,21 +62,22 @@ namespace ContainerOpdrachtVersion3
             return false;
         }
 
-        private bool WillThisLocationKeepTheBalanceOfTheShipWithUnEvenMiddle(int i, Container container)
+        private bool WillStayBalancedWithUnEvenMiddle(int i, Container container)
         {
             int totalLeftCheck = WeightLeft + container.Weight;
             int totalRightCheck = WeightRight + container.Weight;
+            int totalMidCheck = WeightMiddle + container.Weight;
             HasEvenMiddle = false;
 
             if (totalLeftCheck >= totalRightCheck && i > Middle)
             {
                 return true;
             }
-            else if (totalRightCheck > totalLeftCheck && i < Middle)
+            else if (totalRightCheck >= totalLeftCheck && i < Middle)
             {
                 return true;
             }
-            else if (i == Middle)
+            else if (Middle == i && totalMidCheck < totalRightCheck)
             {
                 return true;
             }

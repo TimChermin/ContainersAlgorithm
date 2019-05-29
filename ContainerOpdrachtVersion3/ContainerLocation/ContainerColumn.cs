@@ -8,7 +8,6 @@ namespace ContainerOpdrachtVersion3
 {
     public class ContainerColumn
     {
-        public List<Container> containerStack;
         private int maxHeight;
         private int weight;
         private int valuableCount;
@@ -19,9 +18,11 @@ namespace ContainerOpdrachtVersion3
             this.maxHeight = maxHeight;
         }
 
+        public List<Container> containerStack { get; set; }
+
         public bool TryToPlaceContainer(Container container)
         {
-            if (CanTheContainerBePlacedOnThisStack(container))
+            if (CanBePlacedOnThisStack(container))
             {
                 PlaceContainer(container);
                 return true;
@@ -35,22 +36,23 @@ namespace ContainerOpdrachtVersion3
             ReOrderStack();
         }
 
-        private bool CanTheContainerBePlacedOnThisStack(Container container)
+        private bool CanBePlacedOnThisStack(Container container)
         {
-            if (containerStack.Count + 1 > maxHeight || AddingContainerWouldNotGoOverMaxWeight(container) == false || PlaceingWontDestroyValuables(container) == false)
+            if (containerStack.Count + 1 > maxHeight || AddingWouldNotGoOverMaxWeight(container) == false || PlaceingWontDestroyValuables(container) == false)
             {
                 return false;
             }
             return true;
         }
 
-        private void CountStack()
+        public void CountStack()
         {
             valuableCount = 0;
             weight = 0;
+            int containerCount = 0;
             foreach (var containerInStack in containerStack)
             {
-                if (containerStack.IndexOf(containerInStack) != 0)
+                if (containerCount != 0)
                 {
                     weight += containerInStack.Weight;
                 }
@@ -58,10 +60,11 @@ namespace ContainerOpdrachtVersion3
                 {
                     valuableCount++;
                 }
+                containerCount++;
             }
         }
 
-        private bool AddingContainerWouldNotGoOverMaxWeight(Container container)
+        public bool AddingWouldNotGoOverMaxWeight(Container container)
         {
             CountStack();
             if ((weight + container.Weight) > 120)
@@ -71,7 +74,7 @@ namespace ContainerOpdrachtVersion3
             return true;
         }
 
-        private bool PlaceingWontDestroyValuables(Container container)
+        public bool PlaceingWontDestroyValuables(Container container)
         {
             CountStack();
             if (valuableCount != 0 && container.Valuable == true)
