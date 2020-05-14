@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.572
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerOpdrachtVersion3", "ContainerOpdrachtVersion3\ContainerOpdrachtVersion3.csproj", "{08BD8858-7880-4E59-883B-6620AB02A12E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContainerAlgorithm", "ContainerOpdrachtVersion3\ContainerAlgorithm.csproj", "{08BD8858-7880-4E59-883B-6620AB02A12E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "ContainerOpdrachtUnitTests\UnitTests.csproj", "{7A719268-35DF-455D-9E90-F68A182142F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "ContainerOpdrachtUnitTests\UnitTests.csproj", "{7A719268-35DF-455D-9E90-F68A182142F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
